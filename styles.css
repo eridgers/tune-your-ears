@@ -1,0 +1,74 @@
+body{
+	background-color: #232323;
+	margin: 0;
+	font-family: 'Montserrat', sans-serif;
+}
+
+.square{
+	width: 30%;
+	background-color: #949fff;
+	padding-top: 15%;
+	float:  left;
+	margin: 1.66%;
+	border-radius: 15%;
+	transition: background-color 0.7s;
+	text-align: center;
+	font-weight: 700;
+	font-size: 4rem;
+	color: #232323;
+}
+
+#container{
+	max-width: 600px;
+	margin: 20px auto;
+}
+
+h1{
+	text-align: center;
+	color: white;
+	background-color: steelblue;
+	font-weight: normal;
+	text-transform: uppercase;
+	font-weight: bold;
+	margin: 0;
+	line-height: 1.1;
+	padding: 20px 0;
+}
+
+#stripe{
+	background-color: white;
+	height: 30px;
+	text-align: center;
+	color: black;
+}
+
+#message{
+	display: inline-block;
+	width: 15%;
+}
+
+#streak{
+	float: center;
+}
+
+button{
+	border: none;
+	background: none;
+	text-transform: uppercase;
+	height: 100%;
+	font-weight: 700;
+	color: steelblue;
+	letter-spacing: 1.0px;
+	font-size: inherit;
+	transition: all 0.4s;
+}
+
+button:hover{
+	color: white;
+	background-color: steelblue;
+}
+
+.difficulty{
+	color: white;
+	background-color: steelblue;
+}
