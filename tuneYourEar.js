@@ -109,7 +109,7 @@ function changeColors(color){
 }
 
 function pickNote(){
-	return Math.floor(Math.random() * (level-1)); //notes.length);
+	return Math.floor(Math.random() * (level)); //notes.length);
 }
 
 function populateNotes(){
