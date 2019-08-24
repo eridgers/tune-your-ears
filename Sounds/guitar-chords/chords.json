@@ -1,0 +1,40 @@
+{
+  "resources": [
+    "chords.ogg",
+    "chords.m4a",
+    "chords.mp3",
+    "chords.ac3"
+  ],
+  "spritemap": {
+    "a-major": {
+      "start": 0,
+      "end": 3,
+      "loop": false
+    },
+    "a-minor": {
+      "start": 4,
+      "end": 7,
+      "loop": false
+    },
+    "c-major": {
+      "start": 8,
+      "end": 11,
+      "loop": false
+    },
+    "d-major": {
+      "start": 12,
+      "end": 15,
+      "loop": false
+    },
+    "e-major": {
+      "start": 16,
+      "end": 19,
+      "loop": false
+    },
+    "g-major": {
+      "start": 20,
+      "end": 23,
+      "loop": false
+    }
+  }
+}
