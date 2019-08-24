@@ -4,6 +4,7 @@ var notes = [];
 var pickedNote;
 var winStreak = 0;
 var firstGuess;
+var instrument;
 
 // variables for dom manipulation
 var squares = document.querySelectorAll(".square");
@@ -15,10 +16,25 @@ var hardButton = document.querySelector("#hard");
 var streak = document.querySelector("#streak")
 var playNoteButton = document.querySelector("#playNote");
 
+class Instrument {
+	constructor(name, notes, source, spriteObj) {
+		this.name = name;
+		this.length = notes.length;
+		this.notes = notes;
+		this.sound = new Howl({
+			src: [source],
+			sprite: spriteObj
+		});
+	};
+
+};
+
+
 initialise();
 
 function initialise(){
-	populateNotes();
+	createIntruments();
+	instrument = guitarStrings; //initialise game with acoustic guitar
 	listeners();
 	retry();
 }
@@ -112,19 +128,26 @@ function pickNote(){
 	return Math.floor(Math.random() * (level)); //notes.length);
 }
 
-function populateNotes(){
-	notes = [
-		new Howl({
-			src: ['sounds/GuitarELow.mp3']}),
-		new Howl({
-			src: ['sounds/GuitarA.mp3']}),
-		new Howl({
-			src: ['sounds/GuitarD.mp3']}),
-		new Howl({
-			src: ['sounds/GuitarG.mp3']}),
-		new Howl({
-			src: ['sounds/GuitarB.mp3']}),
-		new Howl({
-			src: ['sounds/GuitarEHigh.mp3']})
-	  ]
+function createIntruments(){
+	// Acoustic Guitar Sprite & Instrument instantiation
+	let guitarStringsSprite = {
+		a: [0, 3000],
+		b: [4000, 3000],
+		d: [8000, 3000],
+		ehigh: [12000, 3000],
+		elow: [16000, 3000],
+		g: [20000, 3000]
+	};
+	guitarStrings = new Instrument("Guitar Strings", ["a","b","d","ehigh","elow","g"], "Sounds/guitar-strings/acoustic.mp3", guitarStringsSprite);
+	
+	// Acoustic Guitar Chords Sprite & Intrument instantiation
+	let guitarChordsSprite = {
+		amajor: [0, 3000],
+		aminor: [4000, 3000],
+		cmajor: [8000, 3000],
+		dmajor: [12000, 3000],
+		emajor: [16000, 3000],
+		gmajor: [20000, 3000]
+	};
+	guitarChords = new Instrument("Guitar Chords", ["amajor","aminor","cmajor","dmajor","emajor","gmajor"], "Sounds/guitar-chords/chords.mp3", guitarChordsSprite);
 };
