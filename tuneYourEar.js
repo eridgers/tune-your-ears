@@ -62,7 +62,7 @@ function listeners(){
 	})
 
 	playNoteButton.addEventListener("click", function(){
-		notes[pickedNote].play();
+		instrument.sound.play(instrument.notes[pickedNote]);
 	})
 
 	for(i=0;i<squares.length;i++){
@@ -73,8 +73,8 @@ function listeners(){
 				displayMessage.textContent = "Correct!"
 				changeColors("#99ff94");  // pale green
 				// reward them with some nice music
-				notes.forEach(notes => {
-					notes.play();
+				instrument.notes.forEach(notes => {
+					instrument.sound.play(notes);
 				});
 				retryButton.textContent = "Play Again";
 				winner = true;
@@ -115,7 +115,7 @@ function retry(){
 	}
 	firstGuess = true;
 	winner = false;
-	notes[pickedNote].play();
+	instrument.sound.play(instrument.notes[pickedNote]);
 }
 
 function changeColors(color){
