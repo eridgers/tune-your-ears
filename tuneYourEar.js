@@ -5,6 +5,7 @@ var pickedNote;
 var winStreak = 0;
 var firstGuess;
 var instrument;
+var instrumentNames = [];
 
 // variables for dom manipulation
 var squares = document.querySelectorAll(".square");
@@ -15,6 +16,7 @@ var easyButton = document.querySelector("#easy");
 var hardButton = document.querySelector("#hard");
 var streak = document.querySelector("#streak")
 var playNoteButton = document.querySelector("#playNote");
+var instrumentSelect = document.querySelector("#instrument-select");
 
 class Instrument {
 	constructor(name, notes, source, spriteObj) {
@@ -25,6 +27,8 @@ class Instrument {
 			src: [source],
 			sprite: spriteObj
 		});
+		// add name to array of available instruments
+		instrumentNames.push(this.name);
 	};
 
 };
@@ -34,10 +38,21 @@ initialise();
 
 function initialise(){
 	createIntruments();
+	populateDropDown();
 	instrument = guitarStrings; //initialise game with acoustic guitar
 	listeners();
 	retry();
 }
+
+function populateDropDown(){
+	// clear options
+	instrumentSelect.innerHtml = "";
+	// loop through Instruments to populate dropdown
+	for (let i = 0; i < instrumentNames.length; i++) {
+		name = instrumentNames[i];
+		instrumentSelect.innerHTML += "<option value=\"" + name + "\">" + name + "</option>"
+	};
+};
 
 function listeners(){
 	retryButton.addEventListener("click", function(){
