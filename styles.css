@@ -32,7 +32,19 @@ h1{
 	font-weight: bold;
 	margin: 0;
 	line-height: 1.1;
-	padding: 20px 0;
+	padding: 20px 0 10px 0;
+}
+
+#instrument-select{
+	display: inline;
+	border-color: black;
+	margin-bottom: 10px;
+}
+
+#instrument{
+	max-width: 100%;
+	text-align: center;
+	background-color: steelblue;
 }
 
 #stripe{
