@@ -1,6 +1,6 @@
 // variables
 var level = 6; //initialise page on hard
-var notes = [];
+var spriteNotes = [];
 var pickedNote;
 var winStreak = 0;
 var firstGuess;
@@ -19,14 +19,15 @@ var playNoteButton = document.querySelector("#playNote");
 var instrumentSelect = document.querySelector("#instrument-select");
 
 class Instrument {
-	constructor(name, notes, source, spriteObj) {
+	constructor(name, spriteNotes, source, spriteObj, labels) {
 		this.name = name;
-		this.length = notes.length;
-		this.notes = notes;
+		this.length = spriteNotes.length;
+		this.spriteNotes = spriteNotes;
 		this.sound = new Howl({
 			src: [source],
 			sprite: spriteObj
 		});
+		this.labels = labels;
 		// add name to array of available instruments
 		instrumentNames.push(this.name);
 	};
@@ -77,8 +78,10 @@ function listeners(){
 	})
 
 	playNoteButton.addEventListener("click", function(){
-		instrument.sound.play(instrument.notes[pickedNote]);
+		instrument.sound.play(instrument.spriteNotes[pickedNote]);
 	})
+
+	instrumentSelect.addEventListener("change",	changeInstrument);
 
 	for(i=0;i<squares.length;i++){
 	squares[i].addEventListener("click", function(){
@@ -88,8 +91,8 @@ function listeners(){
 				displayMessage.textContent = "Correct!"
 				changeColors("#99ff94");  // pale green
 				// reward them with some nice music
-				instrument.notes.forEach(notes => {
-					instrument.sound.play(notes);
+				instrument.spriteNotes.forEach(spriteNotes => {
+					instrument.sound.play(spriteNotes);
 				});
 				retryButton.textContent = "Play Again";
 				winner = true;
@@ -116,6 +119,25 @@ function listeners(){
 	})}
 }
 
+function changeInstrument(){
+	switch (instrumentSelect.value) {
+		case "Guitar Chords":
+			instrument = guitarChords;
+			break;
+		default:
+			instrument = guitarStrings;
+			break;
+	}
+	updateDisplay();
+	retry();
+};
+
+function updateDisplay(){
+	for (let i = 0; i < squares.length; i++) {
+		squares[i].textContent = instrument.labels[i];
+	};
+};
+
 function retry(){
 	retryButton.textContent = "New Note";
 	pickedNote = pickNote();
@@ -130,7 +152,7 @@ function retry(){
 	}
 	firstGuess = true;
 	winner = false;
-	instrument.sound.play(instrument.notes[pickedNote]);
+	instrument.sound.play(instrument.spriteNotes[pickedNote]);
 }
 
 function changeColors(color){
@@ -146,23 +168,38 @@ function pickNote(){
 function createIntruments(){
 	// Acoustic Guitar Sprite & Instrument instantiation
 	let guitarStringsSprite = {
+		elow: [16000, 3000],
 		a: [0, 3000],
 		b: [4000, 3000],
 		d: [8000, 3000],
-		ehigh: [12000, 3000],
-		elow: [16000, 3000],
-		g: [20000, 3000]
+		g: [20000, 3000],
+		b: [4000, 3000],
+		ehigh: [12000, 3000]
 	};
-	guitarStrings = new Instrument("Guitar Strings", ["a","b","d","ehigh","elow","g"], "Sounds/guitar-strings/acoustic.mp3", guitarStringsSprite);
+	guitarStrings = new Instrument(
+		"Guitar Strings",
+		["elow", "a", "d", "g", "b", "ehigh"], 
+		"Sounds/guitar-strings/acoustic.mp3", 
+		guitarStringsSprite,
+		["E", "A", "D", "G", "B", "E"]
+		);
 	
 	// Acoustic Guitar Chords Sprite & Intrument instantiation
 	let guitarChordsSprite = {
+		emajor: [16000, 3000],
+		gmajor: [20000, 3000],
+		aminor: [4000, 3000],
 		amajor: [0, 3000],
 		aminor: [4000, 3000],
 		cmajor: [8000, 3000],
-		dmajor: [12000, 3000],
-		emajor: [16000, 3000],
-		gmajor: [20000, 3000]
+		dmajor: [12000, 3000]
 	};
-	guitarChords = new Instrument("Guitar Chords", ["amajor","aminor","cmajor","dmajor","emajor","gmajor"], "Sounds/guitar-chords/chords.mp3", guitarChordsSprite);
+	// emajor, gmajor, aminor, amajor, cmajor, dmajor
+	guitarChords = new Instrument(
+		"Guitar Chords", 
+		["emajor", "gmajor", "aminor", "amajor", "cmajor", "dmajor"], 
+		"Sounds/guitar-chords/chords.mp3", 
+		guitarChordsSprite,
+		["E", "G", "Am", "A", "C", "D"]
+		);
 };
