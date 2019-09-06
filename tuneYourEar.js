@@ -66,14 +66,22 @@ function listeners(){
 	easyButton.addEventListener("click", function(){
 		this.classList.add("difficulty");
 		hardButton.classList.remove("difficulty");
+		if (checkLength()){
+			level = (instrument.length) /2;
+		}else{
 		level = 3;
+		};
 		retry();
 	})
 
 	hardButton.addEventListener("click", function(){
 		easyButton.classList.remove("difficulty");
 		this.classList.add("difficulty");
+		if (checkLength()){
+			level = instrument.length;
+		}else{
 		level = 6;
+		};
 		retry();
 	})
 
@@ -131,6 +139,9 @@ function changeInstrument(){
 			instrument = guitarStrings;
 			break;
 	}
+	if (checkLength()){
+		level = instrument.length;
+	};
 	updateDisplay();
 	retry();
 };
@@ -167,6 +178,14 @@ function changeColors(color){
 function pickNote(){
 	return Math.floor(Math.random() * (level)); //notes.length);
 }
+
+function checkLength(){
+	if (instrument.length === undefined || instrument.length < 1){
+		console.log("instrument has no length!");
+		return false;
+	}
+	return true;
+};
 
 function createIntruments(){
 	// Acoustic Guitar Sprite & Instrument instantiation
