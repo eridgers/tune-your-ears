@@ -124,6 +124,9 @@ function changeInstrument(){
 		case "Guitar Chords":
 			instrument = guitarChords;
 			break;
+		case "Cello Strings":
+			instrument = celloStrings;
+			break;	
 		default:
 			instrument = guitarStrings;
 			break;
@@ -202,4 +205,20 @@ function createIntruments(){
 		guitarChordsSprite,
 		["E", "G", "Am", "A", "C", "D"]
 		);
+
+	// Cello open strings sprite and Intrument instantiation
+	let celloStringsSprite = {
+		celloC: [0, 3000],
+		celloG: [4000, 3000],
+		celloD: [8000, 3000],
+		celloA: [12000, 3000]
+	};
+
+	celloStrings = new Instrument(
+		"Cello Strings",
+		["celloC", "celloG", "celloD", "celloA"],
+		"Sounds/cello-strings/cello-strings.mp3",
+		celloStringsSprite,
+		["C", "G", "D", "A"]
+	);
 };
