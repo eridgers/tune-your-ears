@@ -95,7 +95,9 @@ function listeners(){
 	squares[i].addEventListener("click", function(){
 		// only check if we haven't already won
 		if(!winner){
-			if(this.id == pickedNote){
+			// get square number which correlates to spriteNotes array
+			guess = this.id.substring(5,6);
+			if(guess == pickedNote){
 				displayMessage.textContent = "Correct!"
 				changeColors("#99ff94");  // pale green
 				// reward them with some nice music
@@ -108,13 +110,13 @@ function listeners(){
 					winStreak += 1;
 				}
 			// if playing on easy don't run for invisible guess
-			}else if(this.id < level){
+			}else if(guess < level){
 				this.style.backgroundColor="#232323";
 				displayMessage.textContent = "Try Again";
 				winStreak = 0;
 				firstGuess = false;
 			}
-			if(this.id < level){
+			if(guess < level){
 				if(firstGuess){
 					streak.textContent = winStreak;
 					firstGuess = false;
@@ -147,8 +149,19 @@ function changeInstrument(){
 };
 
 function updateDisplay(){
+	switch(instrument.length){
+		case 4:
+			newClass = "fourString"
+			oldClass = "sixString"
+			break;
+		default:
+			newClass = "sixString"
+			oldClass = "fourString"
+	}
 	for (let i = 0; i < squares.length; i++) {
 		squares[i].textContent = instrument.labels[i];
+		squares[i].classList.remove(oldClass);
+		squares[i].classList.add(newClass);
 	};
 };
 

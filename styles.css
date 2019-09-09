@@ -4,7 +4,7 @@ body{
 	font-family: 'Montserrat', sans-serif;
 }
 
-.square{
+.sixString{
 	width: 30%;
 	background-color: #949fff;
 	padding-top: 15%;
@@ -16,6 +16,27 @@ body{
 	font-weight: 700;
 	font-size: 4rem;
 	color: #232323;
+}
+
+.fourString {
+    width: 44%;
+    background-color: #949fff;
+    padding-top: 20%;
+    float: left;
+    margin: 3%;
+    border-radius: 15%;
+    transition: background-color 0.7s;
+    text-align: center;
+    font-weight: 700;
+    font-size: 4rem;
+    color: #232323;
+}
+
+#note_4.fourString{
+	display: none;
+}
+#note_5.fourString{
+	display: none;
 }
 
 #container{
