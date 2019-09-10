@@ -4,18 +4,21 @@ body{
 	font-family: 'Montserrat', sans-serif;
 }
 
-.sixString{
+.square{
 	width: 30%;
 	background-color: #949fff;
 	padding-top: 15%;
 	float:  left;
 	margin: 1.66%;
 	border-radius: 15%;
-	transition: background-color 0.7s;
 	text-align: center;
 	font-weight: 700;
 	font-size: 4rem;
 	color: #232323;
+	-webkit-transition: all 0.7s linear;
+    -moz-transition: all 0.7s linear;
+    -o-transition: all 0.7s linear;
+    transition: all 0.7s linear;
 }
 
 .fourString {
@@ -25,7 +28,6 @@ body{
     float: left;
     margin: 3%;
     border-radius: 15%;
-    transition: background-color 0.7s;
     text-align: center;
     font-weight: 700;
     font-size: 4rem;

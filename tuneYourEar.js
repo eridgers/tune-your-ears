@@ -149,20 +149,24 @@ function changeInstrument(){
 };
 
 function updateDisplay(){
-	switch(instrument.length){
-		case 4:
-			newClass = "fourString"
-			oldClass = "sixString"
-			break;
-		default:
-			newClass = "sixString"
-			oldClass = "fourString"
-	}
+	if(instrument.length == 4){
+		for (let i = 0; i < squares.length; i++) {
+			squares[i].textContent = instrument.labels[i];
+			squares[i].classList.add("fourString");
+		};
+	}else{
 	for (let i = 0; i < squares.length; i++) {
 		squares[i].textContent = instrument.labels[i];
-		squares[i].classList.remove(oldClass);
-		squares[i].classList.add(newClass);
+			// if square 4/5 delay class remove
+			if(i == 4 || i == 5){
+				setTimeout(function(){ 
+					squares[i].classList.remove("fourString"); 
+				}, 750);
+			}else{
+				squares[i].classList.remove("fourString");
+			}
 	};
+	}
 };
 
 function retry(){
