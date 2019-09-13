@@ -1,22 +1,22 @@
 // variables
-var level = 6; //initialise page on hard
-var spriteNotes = [];
-var pickedNote;
-var winStreak = 0;
-var firstGuess;
-var instrument;
-var instrumentNames = [];
+let level = 6; //initialise page on hard
+let pickedNote;
+let winStreak = 0;
+let firstGuess;
+let instrument;
+let instrumentNames = [];
+let winner;
+let guess;
 
 // variables for dom manipulation
-var squares = document.querySelectorAll(".square");
-var displayMessage = document.querySelector("#message");
-var h1 = document.querySelector("h1");
-var retryButton = document.querySelector("#newNote");
-var easyButton = document.querySelector("#easy");
-var hardButton = document.querySelector("#hard");
-var streak = document.querySelector("#streak")
-var playNoteButton = document.querySelector("#playNote");
-var instrumentSelect = document.querySelector("#instrument-select");
+const squares = document.querySelectorAll(".square");
+const displayMessage = document.querySelector("#message");
+const retryButton = document.querySelector("#newNote");
+const easyButton = document.querySelector("#easy");
+const hardButton = document.querySelector("#hard");
+const streak = document.querySelector("#streak");
+const playNoteButton = document.querySelector("#playNote");
+const instrumentSelect = document.querySelector("#instrument-select");
 
 class Instrument {
 	constructor(name, spriteNotes, source, spriteObj, labels) {
@@ -30,9 +30,8 @@ class Instrument {
 		this.labels = labels;
 		// add name to array of available instruments
 		instrumentNames.push(this.name);
-	};
-
-};
+	}
+}
 
 
 initialise();
@@ -50,10 +49,10 @@ function populateDropDown(){
 	instrumentSelect.innerHtml = "";
 	// loop through Instruments to populate dropdown
 	for (let i = 0; i < instrumentNames.length; i++) {
-		name = instrumentNames[i];
-		instrumentSelect.innerHTML += "<option value=\"" + name + "\">" + name + "</option>"
-	};
-};
+		let name = instrumentNames[i];
+		instrumentSelect.innerHTML += "<option value=\"" + name + "\">" + name + "</option>";
+	}
+}
 
 function listeners(){
 	retryButton.addEventListener("click", function(){
@@ -62,118 +61,120 @@ function listeners(){
 			streak.textContent = winStreak;
 		}
 		retry();
-	})
+	});
+
 	easyButton.addEventListener("click", function(){
 		this.classList.add("difficulty");
 		hardButton.classList.remove("difficulty");
 		if (checkLength()){
 			level = (instrument.length) /2;
-		}else{
-		level = 3;
-		};
+		}else {
+			level = 3;
+		}
 		retry();
-	})
+	});
 
 	hardButton.addEventListener("click", function(){
 		easyButton.classList.remove("difficulty");
 		this.classList.add("difficulty");
 		if (checkLength()){
 			level = instrument.length;
-		}else{
-		level = 6;
-		};
+		}else {
+			level = 6;
+		}
 		retry();
-	})
+	});
 
 	playNoteButton.addEventListener("click", function(){
 		instrument.sound.play(instrument.spriteNotes[pickedNote]);
-	})
+	});
 
 	instrumentSelect.addEventListener("change",	changeInstrument);
 
-	for(i=0;i<squares.length;i++){
-	squares[i].addEventListener("click", function(){
-		// only check if we haven't already won
-		if(!winner){
-			// get square number which correlates to spriteNotes array
-			guess = this.id.substring(5,6);
-			if(guess == pickedNote){
-				displayMessage.textContent = "Correct!"
-				changeColors("#99ff94");  // pale green
-				// reward them with some nice music
-				instrument.spriteNotes.forEach(spriteNotes => {
-					instrument.sound.play(spriteNotes);
-				});
-				retryButton.textContent = "Play Again";
-				winner = true;
-				if(firstGuess){
-					winStreak += 1;
-				}
-			// if playing on easy don't run for invisible guess
-			}else if(guess < level){
-				this.style.backgroundColor="#232323";
-				displayMessage.textContent = "Try Again";
-				winStreak = 0;
-				firstGuess = false;
-			}
-			if(guess < level){
-				if(firstGuess){
-					streak.textContent = winStreak;
+	for(let i = 0; i < squares.length; i++){
+		squares[i].addEventListener("click", function(){
+			// only check if we haven't already won
+			if(!winner){
+				// get square number which correlates to spriteNotes array
+				guess = this.id.substring(5,6);
+				if(guess == pickedNote){
+					displayMessage.textContent = "Correct!";
+					changeColors("#99ff94");  // pale green
+					// reward them with some nice music
+					instrument.spriteNotes.forEach(spriteNotes => {
+						instrument.sound.play(spriteNotes);
+					});
+					retryButton.textContent = "Play Again";
+					winner = true;
+					if(firstGuess){
+						winStreak += 1;
+					}
+				// if playing on easy don't run for invisible guess
+				}else if(guess < level){
+					this.style.backgroundColor="#232323";
+					displayMessage.textContent = "Try Again";
+					winStreak = 0;
 					firstGuess = false;
 				}
-				else{
-					streak.textContent = 0;
+				if(guess < level){
+					if(firstGuess){
+						streak.textContent = winStreak;
+						firstGuess = false;
+					}
+					else{
+						streak.textContent = 0;
+					}
 				}
 			}
-		}
-	})}
+		});
+	}
 }
 
 function changeInstrument(){
 	switch (instrumentSelect.value) {
-		case "Guitar Chords":
-			instrument = guitarChords;
-			break;
-		case "Cello Strings":
-			instrument = celloStrings;
-			break;	
-		default:
-			instrument = guitarStrings;
-			break;
+	case "Guitar Chords":
+		instrument = guitarChords;
+		break;
+	case "Cello Strings":
+		instrument = celloStrings;
+		break;	
+	default:
+		instrument = guitarStrings;
+		break;
 	}
 	if (checkLength()){
 		level = instrument.length;
-	};
+	}
 	updateDisplay();
 	retry();
-};
+}
 
 function updateDisplay(){
-	if(instrument.length == 4){
+	if(instrument.length === 4){
 		for (let i = 0; i < squares.length; i++) {
 			squares[i].textContent = instrument.labels[i];
 			squares[i].classList.add("fourString");
-		};
-	}else{
-	for (let i = 0; i < squares.length; i++) {
-		squares[i].textContent = instrument.labels[i];
+		}
+	}else {
+		for (let i = 0; i < squares.length; i++) {
+			squares[i].textContent = instrument.labels[i];
 			// if square 4/5 delay class remove
-			if(i == 4 || i == 5){
+			if(i === 4 || i === 5){
 				setTimeout(function(){ 
 					squares[i].classList.remove("fourString"); 
 				}, 750);
-			}else{
+			}else {
 				squares[i].classList.remove("fourString");
 			}
-	};
+		}
 	}
-};
+}
 
 function retry(){
 	retryButton.textContent = "New Note";
 	pickedNote = pickNote();
 	displayMessage.textContent = "";
-	for(i=0;i<squares.length;i++){
+	for(let i = 0; i < squares.length; i++){
 		if(i < level){
 			squares[i].style.backgroundColor = "#949fff";  //pale blue
 		}
@@ -187,13 +188,13 @@ function retry(){
 }
 
 function changeColors(color){
-	for(i=0;i<level;i++){
+	for(let i = 0; i < level; i++){
 		squares[i].style.backgroundColor = color;
 	}
 }
 
 function pickNote(){
-	return Math.floor(Math.random() * (level)); //notes.length);
+	return Math.floor(Math.random() * (level));
 }
 
 function checkLength(){
@@ -202,14 +203,13 @@ function checkLength(){
 		return false;
 	}
 	return true;
-};
+}
 
 function createIntruments(){
 	// Acoustic Guitar Sprite & Instrument instantiation
 	let guitarStringsSprite = {
 		elow: [16000, 3000],
 		a: [0, 3000],
-		b: [4000, 3000],
 		d: [8000, 3000],
 		g: [20000, 3000],
 		b: [4000, 3000],
@@ -221,7 +221,7 @@ function createIntruments(){
 		"Sounds/guitar-strings/acoustic.mp3", 
 		guitarStringsSprite,
 		["E", "A", "D", "G", "B", "E"]
-		);
+	);
 	
 	// Acoustic Guitar Chords Sprite & Intrument instantiation
 	let guitarChordsSprite = {
@@ -229,7 +229,6 @@ function createIntruments(){
 		gmajor: [20000, 3000],
 		aminor: [4000, 3000],
 		amajor: [0, 3000],
-		aminor: [4000, 3000],
 		cmajor: [8000, 3000],
 		dmajor: [12000, 3000]
 	};
@@ -240,7 +239,7 @@ function createIntruments(){
 		"Sounds/guitar-chords/chords.mp3", 
 		guitarChordsSprite,
 		["E", "G", "Am", "A", "C", "D"]
-		);
+	);
 
 	// Cello open strings sprite and Intrument instantiation
 	let celloStringsSprite = {
@@ -257,4 +256,4 @@ function createIntruments(){
 		celloStringsSprite,
 		["C", "G", "D", "A"]
 	);
-};
+}
