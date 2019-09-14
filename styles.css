@@ -107,6 +107,7 @@ button:hover{
 	color: white;
 	background-color: steelblue;
 }
+
 .trigger{
 	float: right;
 	color: black;
@@ -137,6 +138,12 @@ button:hover{
 	text-align: center;
 	font-weight: 900;
 }
+.modal-content ul{
+	background-color: seagreen;
+	color: rgb(1, 39, 18);
+	line-height: 1.5;
+	font-size: 1.2em;
+}
 .close-button {
 	float: right;
 	width: 1.5rem;
@@ -156,3 +163,4 @@ button:hover{
 	transform: scale(1.0);
 	transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
 }
+
