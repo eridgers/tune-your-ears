@@ -4,42 +4,6 @@ body{
 	font-family: 'Montserrat', sans-serif;
 }
 
-/* squares display and animations */
-.square{
-	width: 30%;
-	background-color: #949fff;
-	padding-top: 15%;
-	float:  left;
-	margin: 1.66%;
-	border-radius: 15%;
-	text-align: center;
-	font-weight: 700;
-	font-size: 4rem;
-	color: #232323;
-	-webkit-transition: all 0.7s linear;
-    -moz-transition: all 0.7s linear;
-    -o-transition: all 0.7s linear;
-    transition: all 0.7s linear;
-}
-
-.fourString {
-    width: 44%;
-    padding-top: 20%;
-    margin: 3%;
-}
-
-#note_4.fourString{
-	display: none;
-}
-#note_5.fourString{
-	display: none;
-}
-
-#container{
-	max-width: 600px;
-	margin: 20px auto;
-}
-
 /* main blue header section */
 .header{
 	background-color: steelblue;
@@ -162,6 +126,42 @@ button:hover{
 	background-color: steelblue;
 }
 
+/* squares display and animations */
+.square{
+	width: 30%;
+	background-color: #949fff;
+	padding-top: 15%;
+	float:  left;
+	margin: 1.66%;
+	border-radius: 15%;
+	text-align: center;
+	font-weight: 700;
+	font-size: 4rem;
+	color: #232323;
+	-webkit-transition: all 0.7s linear;
+    -moz-transition: all 0.7s linear;
+    -o-transition: all 0.7s linear;
+    transition: all 0.7s linear;
+}
+
+.fourString {
+    width: 44%;
+    padding-top: 20%;
+    margin: 3%;
+}
+
+#note_4.fourString{
+	display: none;
+}
+#note_5.fourString{
+	display: none;
+}
+
+#container{
+	max-width: 600px;
+	margin: 20px auto;
+}
+
 /* Help modal */
 .trigger{
 	float: right;
@@ -226,4 +226,3 @@ button:hover{
 	transform: scale(1.0);
 	transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
 }
-
