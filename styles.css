@@ -4,6 +4,7 @@ body{
 	font-family: 'Montserrat', sans-serif;
 }
 
+/* squares display and animations */
 .square{
 	width: 30%;
 	background-color: #949fff;
@@ -39,11 +40,14 @@ body{
 	margin: 20px auto;
 }
 
-h1{
+/* main blue header section */
+.header{
+	background-color: steelblue;
 	text-align: center;
 	color: white;
-	background-color: steelblue;
-	font-weight: normal;
+}
+
+h1{
 	text-transform: uppercase;
 	font-weight: bold;
 	margin: 0;
@@ -52,7 +56,6 @@ h1{
 }
 
 #instrument-select{
-	border-color: black;
 	margin: 0px 0px 10px 10px;
 	padding: 2px;
 	width: 175px;
@@ -63,13 +66,64 @@ h1{
 }
 
 #instrument{
-	max-width: 100%;
-	text-align: center;
-	background-color: steelblue;
-	color: white;
 	font-size: 1.25em;
 }
 
+/* Practice Mode label and slider */
+.practice {
+    font-size: 1.25em;
+    padding: 0px 0px 10px 0px;
+}
+
+.slider{
+	position: relative;
+	display: inline-block;
+	width: 2em;
+	height: 1em;
+}
+  
+.slider input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.toggle {
+	position: absolute;
+	cursor: pointer;
+	top: 3px;
+	left: 0;
+	right: 0;
+	bottom: -3px;
+	background-color: #ccc;
+	-webkit-transition: .4s;
+	transition: .4s;
+	border-radius: 1em;
+}
+  
+.toggle:before {
+    position: absolute;
+    content: "";
+    height: 1em;
+    width: 1em;
+    left: 0em;
+    background-color: white;
+    -webkit-transition: .4s;
+	transition: .4s;
+	border-radius: inherit;
+}
+  
+input:checked + .toggle {
+	background-color: rgba(0, 0, 0, 0.5);
+}
+   
+input:checked + .toggle:before {
+	-webkit-transform: translateX(1em);
+	-ms-transform: translateX(1em);
+	transform: translateX(1em);
+}
+
+/* White bar with play commands and feedback */
 #stripe{
 	background-color: white;
 	height: 30px;
@@ -108,10 +162,12 @@ button:hover{
 	background-color: steelblue;
 }
 
+/* Help modal */
 .trigger{
 	float: right;
 	color: black;
 }	
+
 .modal {
 	position: fixed;
 	left: 0;
@@ -124,6 +180,7 @@ button:hover{
 	transform: scale(1.1);
 	transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
 }
+
 .modal-content {
 	position: absolute;
 	top: 50%;
@@ -134,16 +191,20 @@ button:hover{
 	width: 38rem;
 	border-radius: 0.5rem;
 }
+
 .modal-content h2{
 	text-align: center;
 	font-weight: 900;
 }
+
 .modal-content ul{
 	background-color: seagreen;
 	color: rgb(1, 39, 18);
+	color: rgb(0, 31, 14);
 	line-height: 1.5;
 	font-size: 1.2em;
 }
+
 .close-button {
 	float: right;
 	width: 1.5rem;
@@ -154,9 +215,11 @@ button:hover{
 	background-color: lightgray;
 	margin: 10px;
 }
+
 .close-button:hover {
 	background-color: darkgray;
 }
+
 .show-modal {
 	opacity: 1;
 	visibility: visible;
