@@ -144,6 +144,24 @@ button:hover{
     transition: all 0.7s linear;
 }
 
+.display{
+	position: relative;
+	left: 13%;
+}
+
+.fas, .far {
+    font-weight: 900;
+    position: relative;
+    float: right;
+    left: -5%;
+    bottom: 80px;
+    font-size: .75em;
+}
+
+.far:hover, .fas:hover{
+	color: #eee;
+}
+
 .fourString {
     width: 44%;
     padding-top: 20%;
