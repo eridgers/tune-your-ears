@@ -155,11 +155,16 @@ button:hover{
     float: right;
     left: -5%;
     bottom: 80px;
-    font-size: .75em;
+	font-size: .75em;
 }
 
 .far:hover, .fas:hover{
 	color: #eee;
+	transform: scale(1.2);
+}
+
+i.clicked:hover{
+	opacity: 0;
 }
 
 .fourString {

@@ -99,10 +99,8 @@ function listeners(){
 	practiceButton.addEventListener("click", togglePracticeMode);
 
 	for(let i = 0; i <squares.length; i++){
-		playSampleButton[i].addEventListener("click", function(e){
-			instrument.sound.play(instrument.spriteNotes[i]);
-			e.stopImmediatePropagation();
-		});
+		playSampleButton[i].addEventListener("click", playSample);
+		playSampleButton[i].index = i;
 	}
 
 	for(let i = 0; i < squares.length; i++){
@@ -114,6 +112,15 @@ function listeners(){
 				if(guess == pickedNote){
 					displayMessage.textContent = "Correct!";
 					changeColors("#99ff94");  // pale green
+					//add hover state over sample play in practice mode
+					if(practiceMode === -1){
+						squares.forEach(squares => {
+							squares.children[1].children[0].classList.remove("clicked");
+						});
+						playSampleButton.forEach(playSampleButton => {
+							playSampleButton.addEventListener("click", playSample);
+						});
+					}
 					// reward them with some nice music
 					instrument.spriteNotes.forEach(spriteNotes => {
 						instrument.sound.play(spriteNotes);
@@ -126,6 +133,9 @@ function listeners(){
 				// if playing on easy don't run for invisible guess
 				}else if(guess < level){
 					this.style.backgroundColor="#232323";
+					//remove hover state over sample play in practice mode
+					playSampleButton[i].classList.add("clicked");
+					playSampleButton[i].removeEventListener("click", playSample);
 					displayMessage.textContent = "Try Again";
 					winStreak = 0;
 					firstGuess = false;
@@ -191,8 +201,9 @@ function togglePracticeMode(){
 			squareDisplays[i].classList.add("display");
 		}
 		playSampleButton = document.querySelectorAll(".far");
-		playSampleButton.forEach(playSampleButton => {
+		playSampleButton.forEach((playSampleButton, i) => {
 			playSampleButton.addEventListener("click", playSample);
+			playSampleButton.index = i;
 		});
 	}else{
 		for (let i = 0; i < squares.length; i++) {
@@ -206,7 +217,7 @@ function togglePracticeMode(){
 }
 
 function playSample(e){
-	instrument.sound.play(instrument.spriteNotes[2]);
+	instrument.sound.play(instrument.spriteNotes[e.target.index]);
 	e.stopImmediatePropagation();
 }
 
