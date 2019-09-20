@@ -7,9 +7,12 @@ let instrument;
 let instrumentNames = [];
 let winner;
 let guess;
+let practiceMode = -1;
 
 // variables for dom manipulation
 const squares = document.querySelectorAll(".square");
+const squareDisplays = document.querySelectorAll(".display");
+const squareButton = document.querySelectorAll(".playSample");
 const displayMessage = document.querySelector("#message");
 const retryButton = document.querySelector("#newNote");
 const easyButton = document.querySelector("#easy");
@@ -17,6 +20,8 @@ const hardButton = document.querySelector("#hard");
 const streak = document.querySelector("#streak");
 const playNoteButton = document.querySelector("#playNote");
 const instrumentSelect = document.querySelector("#instrument-select");
+const practiceButton = document.querySelector(".toggle");
+let playSampleButton = document.querySelectorAll(".far");
 
 class Instrument {
 	constructor(name, spriteNotes, source, spriteObj, labels) {
@@ -91,6 +96,15 @@ function listeners(){
 
 	instrumentSelect.addEventListener("change",	changeInstrument);
 
+	practiceButton.addEventListener("click", togglePracticeMode);
+
+	for(let i = 0; i <squares.length; i++){
+		playSampleButton[i].addEventListener("click", function(e){
+			instrument.sound.play(instrument.spriteNotes[i]);
+			e.stopImmediatePropagation();
+		});
+	}
+
 	for(let i = 0; i < squares.length; i++){
 		squares[i].addEventListener("click", function(){
 			// only check if we haven't already won
@@ -152,12 +166,12 @@ function changeInstrument(){
 function updateDisplay(){
 	if(instrument.length === 4){
 		for (let i = 0; i < squares.length; i++) {
-			squares[i].textContent = instrument.labels[i];
+			squareDisplays[i].textContent = instrument.labels[i];
 			squares[i].classList.add("fourString");
 		}
 	}else {
 		for (let i = 0; i < squares.length; i++) {
-			squares[i].textContent = instrument.labels[i];
+			squareDisplays[i].textContent = instrument.labels[i];
 			// if square 4/5 delay class remove
 			if(i === 4 || i === 5){
 				setTimeout(function(){ 
@@ -168,6 +182,32 @@ function updateDisplay(){
 			}
 		}
 	}
+}
+
+function togglePracticeMode(){
+	if(practiceMode === 1){
+		for (let i = 0; i < squares.length; i++) {
+			squareButton[i].innerHTML = '<i class="far fa-play-circle"></i>';
+			squareDisplays[i].classList.add("display");
+		}
+		playSampleButton = document.querySelectorAll(".far");
+		playSampleButton.forEach(playSampleButton => {
+			playSampleButton.addEventListener("click", playSample);
+		});
+	}else{
+		for (let i = 0; i < squares.length; i++) {
+			squareButton[i].innerHTML = "";
+			squareDisplays[i].classList.remove("display");
+			playSampleButton[i].removeEventListener("click", playSample);
+		}
+	}
+	practiceMode *= -1;
+	retry();
+}
+
+function playSample(e){
+	instrument.sound.play(instrument.spriteNotes[2]);
+	e.stopImmediatePropagation();
 }
 
 function retry(){
