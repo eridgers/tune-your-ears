@@ -110,26 +110,7 @@ function listeners(){
 				// get square number which correlates to spriteNotes array
 				guess = this.id.substring(5,6);
 				if(guess == pickedNote){
-					displayMessage.textContent = "Correct!";
-					changeColors("#99ff94");  // pale green
-					//add hover state over sample play in practice mode
-					if(practiceMode === -1){
-						squares.forEach(squares => {
-							squares.children[1].children[0].classList.remove("clicked");
-						});
-						playSampleButton.forEach(playSampleButton => {
-							playSampleButton.addEventListener("click", playSample);
-						});
-					}
-					// reward them with some nice music
-					instrument.spriteNotes.forEach(spriteNotes => {
-						instrument.sound.play(spriteNotes);
-					});
-					retryButton.textContent = "Play Again";
-					winner = true;
-					if(firstGuess){
-						winStreak += 1;
-					}
+					youWon();
 				// if playing on easy don't run for invisible guess
 				}else if(guess < level){
 					this.style.backgroundColor="#232323";
@@ -236,6 +217,28 @@ function retry(){
 	firstGuess = true;
 	winner = false;
 	instrument.sound.play(instrument.spriteNotes[pickedNote]);
+}
+
+function youWon(){
+	displayMessage.textContent = "Correct!";
+	changeColors("#99ff94");  // pale green
+	//add hover state over sample play in practice mode
+	squares.forEach(squares => {
+		squares.children[1].children[0].classList.remove("clicked");
+		// console.log(squares);
+	});
+	playSampleButton.forEach(playSampleButton => {
+		playSampleButton.addEventListener("click", playSample);
+	});
+	// reward them with some nice music
+	instrument.spriteNotes.forEach(spriteNotes => {
+		instrument.sound.play(spriteNotes);
+	});
+	retryButton.textContent = "Play Again";
+	winner = true;
+	if(firstGuess){
+		winStreak += 1;
+	}
 }
 
 function changeColors(color){
