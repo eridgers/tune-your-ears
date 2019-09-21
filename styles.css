@@ -210,6 +210,7 @@ i.clicked:hover{
 	visibility: hidden;
 	transform: scale(1.1);
 	transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+	z-index: 1;
 }
 
 .modal-content {
@@ -226,25 +227,27 @@ i.clicked:hover{
 .modal-content h2{
 	text-align: center;
 	font-weight: 900;
+	color: #2c3e50;
+	text-transform: uppercase;
+	margin: auto;
 }
 
 .modal-content ul{
-	background-color: seagreen;
-	color: rgb(1, 39, 18);
+	background-color: #27ae60;
 	color: rgb(0, 31, 14);
 	line-height: 1.5;
 	font-size: 1.2em;
+	margin: 10px 0px;
+	text-align: left;
 }
 
 .close-button {
 	float: right;
 	width: 1.5rem;
 	line-height: 1.5rem;
-	text-align: center;
 	cursor: pointer;
 	border-radius: 0.25rem;
 	background-color: lightgray;
-	margin: 10px;
 }
 
 .close-button:hover {
