@@ -272,7 +272,7 @@ function createIntruments(){
 	guitarStrings = new Instrument(
 		"Guitar Strings",
 		["elow", "a", "d", "g", "b", "ehigh"], 
-		"Sounds/guitar-strings/acoustic.mp3", 
+		"sounds/guitar-strings/acoustic.mp3", 
 		guitarStringsSprite,
 		["E", "A", "D", "G", "B", "E"]
 	);
@@ -290,7 +290,7 @@ function createIntruments(){
 	guitarChords = new Instrument(
 		"Guitar Chords", 
 		["emajor", "gmajor", "aminor", "amajor", "cmajor", "dmajor"], 
-		"Sounds/guitar-chords/chords.mp3", 
+		"sounds/guitar-chords/chords.mp3", 
 		guitarChordsSprite,
 		["E", "G", "Am", "A", "C", "D"]
 	);
@@ -306,7 +306,7 @@ function createIntruments(){
 	celloStrings = new Instrument(
 		"Cello Strings",
 		["celloC", "celloG", "celloD", "celloA"],
-		"Sounds/cello-strings/cello-strings.mp3",
+		"sounds/cello-strings/cello-strings.mp3",
 		celloStringsSprite,
 		["C", "G", "D", "A"]
 	);
