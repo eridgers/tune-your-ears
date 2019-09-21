@@ -7,7 +7,7 @@ let instrument;
 let instrumentNames = [];
 let winner;
 let guess;
-let practiceMode = -1;
+let practiceMode = 1;
 
 // variables for dom manipulation
 const squares = document.querySelectorAll(".square");
@@ -176,7 +176,7 @@ function updateDisplay(){
 }
 
 function togglePracticeMode(){
-	if(practiceMode === 1){
+	if(practiceMode === -1){
 		for (let i = 0; i < squares.length; i++) {
 			squareButton[i].innerHTML = '<i class="far fa-play-circle"></i>';
 			squareDisplays[i].classList.add("display");
@@ -223,13 +223,14 @@ function youWon(){
 	displayMessage.textContent = "Correct!";
 	changeColors("#99ff94");  // pale green
 	//add hover state over sample play in practice mode
-	squares.forEach(squares => {
-		squares.children[1].children[0].classList.remove("clicked");
-		// console.log(squares);
-	});
-	playSampleButton.forEach(playSampleButton => {
-		playSampleButton.addEventListener("click", playSample);
-	});
+	if(practiceMode === 1){
+		squares.forEach(squares => {
+			squares.children[1].children[0].classList.remove("clicked");
+		});
+		playSampleButton.forEach(playSampleButton => {
+			playSampleButton.addEventListener("click", playSample);
+		});
+	}
 	// reward them with some nice music
 	instrument.spriteNotes.forEach(spriteNotes => {
 		instrument.sound.play(spriteNotes);
