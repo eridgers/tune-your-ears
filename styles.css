@@ -149,7 +149,15 @@ button:hover{
 	left: 13%;
 }
 
-.fas, .far {
+div.fourString span.display{
+	left: 9%;
+}
+
+div.fourString i.far{
+	bottom: 110px;
+}
+
+.far {
     font-weight: 900;
     position: relative;
     float: right;
@@ -158,8 +166,8 @@ button:hover{
 	font-size: .75em;
 }
 
-.far:hover, .fas:hover{
-	color: #eee;
+.far:hover{
+	color: #dff9fb;
 	transform: scale(1.2);
 }
 
